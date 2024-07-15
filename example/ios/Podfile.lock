@@ -8,6 +8,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - MediaPipeTasksCommon
   - MediaPipeTasksVision (= 0.10.12)
   - thinksys_mediapipe_plugin (from `.symlinks/plugins/thinksys_mediapipe_plugin/ios`)
 
@@ -26,8 +27,8 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   MediaPipeTasksCommon: 254e6bff77804b262f6ecf180477142ea551e802
   MediaPipeTasksVision: 78d5c47cd7996b4d815bacba0a52dbf01458dfaf
-  thinksys_mediapipe_plugin: b62e381ebc0c69f11613d23599f74f61e2d37c23
+  thinksys_mediapipe_plugin: 89b60a172f16a2906d40bf14d270c83643b9f3a8
 
-PODFILE CHECKSUM: b3887fb615b224b423712b118242960244da07d6
+PODFILE CHECKSUM: df9053b4706ada6f8978635dbccec791999161bf
 
 COCOAPODS: 1.15.2

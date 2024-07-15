@@ -45,5 +45,8 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+    <string>This app uses camera to get pose landmarks that appear in the camera feed.</string>
+
 </dict>
 </plist>
