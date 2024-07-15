@@ -230,7 +230,7 @@ class CameraViewController: UIViewController {
   }
   
   @objc private func clearAndInitializePoseLandmarkerService() {
-    poseLandmarkerService = nil
+    //poseLandmarkerService = nil
     poseLandmarkerService = PoseLandmarkerService
       .liveStreamPoseLandmarkerService(
         modelPath: InferenceConfigurationManager.sharedInstance.model.modelPath,
@@ -240,6 +240,7 @@ class CameraViewController: UIViewController {
         minTrackingConfidence: InferenceConfigurationManager.sharedInstance.minTrackingConfidence,
         liveStreamDelegate: self,
         delegate: InferenceConfigurationManager.sharedInstance.delegate)
+      print("Overlayservice : " + (InferenceConfigurationManager.sharedInstance.model.modelPath ?? "No path"))
   }
   
   private func clearPoseLandmarkerServiceOnSessionInterruption() {

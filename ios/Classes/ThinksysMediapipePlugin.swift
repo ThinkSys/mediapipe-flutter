@@ -6,7 +6,7 @@ public class ThinksysMediapipePlugin: NSObject, FlutterPlugin {
 
       let factory = PoseDetectionView()
           registrar.register(factory, withId: "com.thinksys.pose_detection")
-      
+//      
 //      let channel = FlutterMethodChannel(name: "thinksys_mediapipe_plugin", binaryMessenger: registrar.messenger())
 //    let instance = ThinksysMediapipePlugin()
 //    registrar.addMethodCallDelegate(instance, channel: channel)

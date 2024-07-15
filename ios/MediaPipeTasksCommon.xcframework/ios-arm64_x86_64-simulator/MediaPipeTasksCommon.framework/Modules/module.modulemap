@@ -1,0 +1,13 @@
+framework module MediaPipeTasksCommon {
+  export *
+  module * { export * }
+  link "dl"
+  link "m"
+  link "pthread"
+  link framework "Accelerate"
+  link framework "CoreFoundation"
+  link framework "CoreGraphics"
+  link framework "CoreVideo"
+  link framework "Metal"
+  link framework "OpenGLES"
+}

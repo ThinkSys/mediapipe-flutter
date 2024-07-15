@@ -55,13 +55,18 @@ enum Model: Int, CaseIterable {
     switch self {
     case .pose_landmarker_lite:
       return Bundle.main.path(
-        forResource: "mediapipe_models/pose_landmarker_lite", ofType: "task")
+        forResource: "pose_landmarker_lite", ofType: "task")
     case .pose_landmarker_full:
       return Bundle.main.path(
-        forResource: "mediapipe_models/pose_landmarker_full", ofType: "task")
+        forResource: "pose_landmarker_full", ofType: "task")
     case .pose_landmarker_heavy:
-      return Bundle.main.path(
-        forResource: "mediapipe_models/pose_landmarker_heavy", ofType: "task")
+        var bundle = Bundle(for: ThinksysMediapipePlugin.self);
+        var path = bundle.path(forResource: "pose_landmarker_heavy", ofType: "task")
+//        var path = Bundle.main.path(for: ,
+//            forResource: "pose_landmarker_heavy", ofType: "task");
+        print("ModelPath: \(path) && \(bundle.bundleURL) && \(bundle.bundlePath)")
+
+      return path
     }
   }
 
