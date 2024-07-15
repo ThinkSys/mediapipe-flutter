@@ -32,46 +32,47 @@ class _PoseDetectionWidgetState extends State<PoseDetectionWidget> {
       'height': MediaQuery.of(context).size.height * 0.5,
     };
 
-
-
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              color: Colors.yellow,
-             width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.5,
-              padding: const EdgeInsets.all(20),
-              child: AndroidView(
-                viewType: viewType,
-                layoutDirection: TextDirection.ltr,
-                creationParams: creationParams,
-                creationParamsCodec: const StandardMessageCodec(),
-                onPlatformViewCreated: (viewId){
-                  print("platform view created : $viewId");
-                },
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                height: 50,
-                color: Colors.blue,
-                margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-                child: const Center(
-                    child: Text(
-                      "Submit",
-                      style: TextStyle(color: Colors.white),
-                    )),
-              ),
-            )
-          ],
+        return const Center(
+          child: Text("This platform is not supported yet."),
         );
+      // return Column(
+      //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //   crossAxisAlignment: CrossAxisAlignment.center,
+      //   children: [
+      //     Container(
+      //       color: Colors.yellow,
+      //      width: MediaQuery.of(context).size.width,
+      //       height: MediaQuery.of(context).size.height * 0.5,
+      //       padding: const EdgeInsets.all(20),
+      //       child: AndroidView(
+      //         viewType: viewType,
+      //         layoutDirection: TextDirection.ltr,
+      //         creationParams: creationParams,
+      //         creationParamsCodec: const StandardMessageCodec(),
+      //         onPlatformViewCreated: (viewId){
+      //           print("platform view created : $viewId");
+      //         },
+      //       ),
+      //     ),
+      //     GestureDetector(
+      //       onTap: () {
+      //         Navigator.pop(context);
+      //       },
+      //       child: Container(
+      //         height: 50,
+      //         color: Colors.blue,
+      //         margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+      //         child: const Center(
+      //             child: Text(
+      //               "Submit",
+      //               style: TextStyle(color: Colors.white),
+      //             )),
+      //       ),
+      //     )
+      //   ],
+      // );
       case TargetPlatform.iOS:
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
