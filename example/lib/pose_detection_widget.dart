@@ -85,6 +85,9 @@ class _PoseDetectionWidgetState extends State<PoseDetectionWidget> {
                 layoutDirection: TextDirection.ltr,
                 creationParams: creationParams,
                 creationParamsCodec: const StandardMessageCodec(),
+                onPlatformViewCreated: (id){
+
+                },
               ),
             ),
             GestureDetector(

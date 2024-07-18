@@ -230,7 +230,7 @@ class CameraViewController: UIViewController {
   }
   
   @objc private func clearAndInitializePoseLandmarkerService() {
-    //poseLandmarkerService = nil
+    poseLandmarkerService = nil
     poseLandmarkerService = PoseLandmarkerService
       .liveStreamPoseLandmarkerService(
         modelPath: InferenceConfigurationManager.sharedInstance.model.modelPath,
