@@ -23,13 +23,3 @@ A Thinksys plugin for pose detection for Flutter framework.
 14. Run the build in physical device
 15. You can make plugin code changes in Pods/Development Pods/thinksys_mediapipe_plugin/../../example/ios/.symlinks/plugin/thinksys_mediapipe_plugin/ios/Classes folder
 
-
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-

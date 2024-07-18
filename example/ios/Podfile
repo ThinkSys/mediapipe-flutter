@@ -29,8 +29,8 @@ flutter_ios_podfile_setup
 
 target 'Runner' do
   use_frameworks!
-  pod 'MediaPipeTasksVision', '0.10.12'
-  pod 'MediaPipeTasksCommon'
+  pod 'MediaPipeTasksVision', '0.10.14'
+  pod 'MediaPipeTasksCommon', '0.10.14'
   use_modular_headers!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
