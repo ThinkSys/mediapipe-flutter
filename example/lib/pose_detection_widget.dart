@@ -11,6 +11,21 @@ class PoseDetectionWidget extends StatefulWidget {
 }
 
 class _PoseDetectionWidgetState extends State<PoseDetectionWidget> {
+   String viewType = 'com.thinksys.pose_detection';
+   EventChannel? getPoseLandmarks;
+
+
+  Stream<dynamic>  poseLandmarksDataStream() {
+    return getPoseLandmarks!.receiveBroadcastStream().map((event) => event);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPoseLandmarks = EventChannel(viewType);
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +40,7 @@ class _PoseDetectionWidgetState extends State<PoseDetectionWidget> {
 
   Widget cameraWidget() {
     // This is used in the platform side to register the view.
-    const String viewType = 'com.thinksys.pose_detection';
+
     // Pass parameters to the platform side.
     final Map<String, dynamic> creationParams = <String, dynamic>{
       'width': MediaQuery.of(context).size.width,
@@ -86,7 +101,9 @@ class _PoseDetectionWidgetState extends State<PoseDetectionWidget> {
                 creationParams: creationParams,
                 creationParamsCodec: const StandardMessageCodec(),
                 onPlatformViewCreated: (id){
-
+                  poseLandmarksDataStream().listen((data){
+                    print("Data $data");
+                  });
                 },
               ),
             ),

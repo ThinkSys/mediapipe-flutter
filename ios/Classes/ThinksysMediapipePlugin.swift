@@ -4,7 +4,7 @@ import UIKit
 public class ThinksysMediapipePlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
 
-      let factory = PoseDetectionView()
+      let factory = PoseDetectionView(messenger : registrar.messenger())
           registrar.register(factory, withId: "com.thinksys.pose_detection")
     
 //

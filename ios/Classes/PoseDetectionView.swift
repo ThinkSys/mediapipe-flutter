@@ -13,10 +13,10 @@ import UIKit
 
 
 class PoseDetectionView: NSObject, FlutterPlatformViewFactory {
-   // private var messenger: FlutterBinaryMessenger
+    private var messenger: FlutterBinaryMessenger
 
-    override init() {
-      //  self.messenger = messenger
+    init(messenger: FlutterBinaryMessenger) {
+        self.messenger = messenger
         super.init()
     }
 
@@ -28,8 +28,8 @@ class PoseDetectionView: NSObject, FlutterPlatformViewFactory {
         return FLNativeView(
             frame: frame,
             viewIdentifier: viewId,
-            arguments: args
-           // binaryMessenger: messenger
+            arguments: args,
+            binaryMessenger: messenger
         )
     }
 
@@ -46,16 +46,27 @@ class FLNativeView: NSObject, FlutterPlatformView {
     init(
         frame: CGRect,
         viewIdentifier viewId: Int64,
-        arguments args: Any?
-      //  binaryMessenger messenger: FlutterBinaryMessenger?
+        arguments args: Any?,
+        binaryMessenger messenger: FlutterBinaryMessenger?
     ) {
-        _camerViewController = CameraViewController()
+        _camerViewController = CameraViewController(messenger: messenger!)
 //        _view = CameraView()
         _view = _camerViewController.view
+
+
         super.init()
     }
 
     func view() -> UIView {
         return _view
     }
+    
+    private func handleMethodCall(call: FlutterMethodCall, result: @escaping FlutterResult) {
+           if call.method == "getData" {
+               let data = "Data from native view"
+               result(data)
+           } else {
+               result(FlutterMethodNotImplemented)
+           }
+       }
 }
