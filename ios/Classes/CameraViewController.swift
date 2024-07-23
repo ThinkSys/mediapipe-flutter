@@ -25,12 +25,14 @@ protocol InterfaceUpdatesDelegate: AnyObject {
     func shouldClicksBeEnabled(_ isEnabled: Bool)
 }
 
+
 /**
  * The view controller is responsible for performing detection on incoming frames from the live camera and presenting the frames with the
  * landmark of the landmarked poses to the user.
  */
 class CameraViewController: UIViewController, FlutterStreamHandler {
     private var eventSink: FlutterEventSink?
+    private var filters: [String: Bool] = ["Right Leg": true, "Right Arm": true, "Left Arm": true, "Torso": true, "Left Leg": true, "Face": true]
     
     
     private struct Constants {
@@ -125,9 +127,41 @@ class CameraViewController: UIViewController, FlutterStreamHandler {
 #endif
     
     private func setupEventChannel(messenger: FlutterBinaryMessenger) {
+        /// Event channel to pass pose landmarks
         let eventChannel = FlutterEventChannel(name: "com.thinksys.pose_detection", binaryMessenger: messenger)
         eventChannel.setStreamHandler(self)
+        
+        /// Method channel to update pose landmarks filters
+        let filtersChannel = FlutterMethodChannel(name: "com.thinksys.pose_detection/filters", binaryMessenger: messenger)
+        filtersChannel.setMethodCallHandler { [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) in
+                guard let strongSelf = self else {
+                    result(FlutterError(code: "UNAVAILABLE", message: "Weak self is nil", details: nil))
+                    return
+                }
+                if call.method == "updateFilters" {
+                    if let filters = call.arguments as? [String: Bool] {
+                        self?.updateFilters(filters: filters)
+                        result(nil)
+                    } else {
+                        result(FlutterError(code: "INVALID_ARGUMENT", message: "Invalid filter options", details: nil))
+                    }
+                } else {
+                    result(FlutterMethodNotImplemented)
+                }
+            }
+        
     }
+    
+    private func updateFilters(filters: [String: Bool]) {
+//       self.filters = filters
+        print("Items : \(filters)")
+        self.filters = filters
+        self.initializePoseLandmarkerServiceOnSessionResumption()
+       // Implement filter update logic
+     }
+    
+  
+    
     
     func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
         self.eventSink = events
@@ -420,7 +454,9 @@ extension CameraViewController: PoseLandmarkerServiceLiveStreamDelegate {
                 inferredOnImageOfSize: imageSize,
                 ovelayViewSize: weakSelf.overlayView.bounds.size,
                 imageContentMode: weakSelf.overlayView.imageContentMode,
-                andOrientation: UIImage.Orientation.from(deviceOrientation: UIDevice.current.orientation))
+                andOrientation: UIImage.Orientation.from(deviceOrientation: UIDevice.current.orientation),
+                filters: self?.filters
+            )
             
             weakSelf.overlayView.draw(poseOverlays: poseOverlays,
                                       inBoundsOfContentImageOfSize: imageSize,

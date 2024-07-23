@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:thinksys_mediapipe_plugin_example/landmarks_filter_options.dart';
 
 class PoseDetectionWidget extends StatefulWidget {
   const PoseDetectionWidget({super.key});
@@ -11,11 +12,35 @@ class PoseDetectionWidget extends StatefulWidget {
 }
 
 class _PoseDetectionWidgetState extends State<PoseDetectionWidget> {
-   String viewType = 'com.thinksys.pose_detection';
-   EventChannel? getPoseLandmarks;
+  String viewType = 'com.thinksys.pose_detection';
+  static const platform = MethodChannel('com.thinksys.pose_detection/filters');
+  EventChannel? getPoseLandmarks;
 
+  Map<String, bool> selectedFilters = {
+    'Face': true,
+    'Left Arm': true,
+    'Right Arm': true,
+    'Torso': true,
+    'Left Leg': true,
+    'Right Leg': true,
+  };
 
-  Stream<dynamic>  poseLandmarksDataStream() {
+  void _updateFilters(Map<String, bool> filters) {
+    setState(() {
+      selectedFilters = filters;
+    });
+    _sendFiltersToNative();
+  }
+
+  Future<void> _sendFiltersToNative() async {
+    try {
+      await platform.invokeMethod('updateFilters', selectedFilters);
+    } on PlatformException catch (e) {
+      print("Failed to update filters: '${e.message}'.");
+    }
+  }
+
+  Stream<dynamic> poseLandmarksDataStream() {
     return getPoseLandmarks!.receiveBroadcastStream().map((event) => event);
   }
 
@@ -23,7 +48,6 @@ class _PoseDetectionWidgetState extends State<PoseDetectionWidget> {
   void initState() {
     super.initState();
     getPoseLandmarks = EventChannel(viewType);
-
   }
 
   @override
@@ -32,6 +56,14 @@ class _PoseDetectionWidgetState extends State<PoseDetectionWidget> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Camera View"),
+          actions: [
+            GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(CupertinoPageRoute(
+                      builder: (_) => LandmarksFilterOptions(onFilterChange: _updateFilters)));
+                },
+                child: Icon(Icons.settings_input_component_sharp))
+          ],
         ),
         body: cameraWidget(),
       ),
@@ -100,9 +132,9 @@ class _PoseDetectionWidgetState extends State<PoseDetectionWidget> {
                 layoutDirection: TextDirection.ltr,
                 creationParams: creationParams,
                 creationParamsCodec: const StandardMessageCodec(),
-                onPlatformViewCreated: (id){
-                  poseLandmarksDataStream().listen((data){
-                    print("Data $data");
+                onPlatformViewCreated: (id) {
+                  poseLandmarksDataStream().listen((data) {
+                    // print("Data $data");
                   });
                 },
               ),

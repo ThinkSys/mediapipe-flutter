@@ -84,7 +84,7 @@ class OverlayView: UIView {
   override func draw(_ rect: CGRect) {
     for poseOverlay in poseOverlays {
       drawLines(poseOverlay.lines)
-      drawDots(poseOverlay.dots)
+//      drawDots(poseOverlay.dots)
     }
   }
 
@@ -205,9 +205,12 @@ class OverlayView: UIView {
     inferredOnImageOfSize originalImageSize: CGSize,
     ovelayViewSize: CGSize,
     imageContentMode: UIView.ContentMode,
-    andOrientation orientation: UIImage.Orientation) -> [PoseOverlay] {
+    andOrientation orientation: UIImage.Orientation,
+    filters: [String: Bool]?
+  ) -> [PoseOverlay] {
 
       var poseOverlays: [PoseOverlay] = []
+      var lines: [Line] = []
 
       guard !landmarks.isEmpty else {
         return []
@@ -231,17 +234,99 @@ class OverlayView: UIView {
         }
 
         let dots: [CGPoint] = transformedPoseLandmarks.map({CGPoint(x: CGFloat($0.x) * originalImageSize.width * offsetsAndScaleFactor.scaleFactor + offsetsAndScaleFactor.xOffset, y: CGFloat($0.y) * originalImageSize.height * offsetsAndScaleFactor.scaleFactor + offsetsAndScaleFactor.yOffset)})
-          let lines: [Line] = PoseLandmarker.poseLandmarks
-            .map({ connection in
-              let start = dots[Int(connection.start)]
-              let end = dots[Int(connection.end)]
-              return Line(from: start,
-                          to: end)
-            })
-
+          
+          if(filters == nil){
+              // Old code of lines
+               lines = PoseLandmarker.poseLandmarks
+                  .map({ connection in
+                      let start = dots[Int(connection.start)]
+                      let end = dots[Int(connection.end)]
+                      return Line(from: start,
+                                  to: end)
+                  })
+          } else {
+              let connections = generateConnections(filters: filters!)
+              print("Filters : \(String(describing: filters))")
+              print("Connections : \(connections)")
+                         lines = connections.compactMap { connection in
+                            let startIndex = dots[Int(connection.start)]
+                            let endIndex = dots[Int(connection.end)]
+                           return Line(from: startIndex, to: endIndex)
+                    }
+              }
+          
+          
         poseOverlays.append(PoseOverlay(dots: dots, lines: lines))
       }
 
       return poseOverlays
+    }
+    
+    
+   static func generateConnections(filters: [String: Bool]) -> [Connection] {
+        var connections: [Connection] = []
+
+        if filters["Face"] == true {
+            connections.append(contentsOf: [
+                Connection(start: 0, end: 1),
+                Connection(start: 1, end: 2),
+                Connection(start: 2, end: 3),
+                Connection(start: 3, end: 7),
+                Connection(start: 0, end: 4),
+                Connection(start: 4, end: 5),
+                Connection(start: 5, end: 6),
+                Connection(start: 6, end: 8),
+                Connection(start: 9, end: 10)
+            ])
+        }
+
+        if filters["Left Arm"] == true {
+            connections.append(contentsOf: [
+                Connection(start: 11, end: 13),
+                Connection(start: 13, end: 15),
+                Connection(start: 15, end: 17),
+                Connection(start: 15, end: 19),
+                Connection(start: 15, end: 21)
+            ])
+        }
+
+        if filters["Right Arm"] == true {
+            connections.append(contentsOf: [
+                Connection(start: 12, end: 14),
+                Connection(start: 14, end: 16),
+                Connection(start: 16, end: 18),
+                Connection(start: 16, end: 20),
+                Connection(start: 16, end: 22)
+            ])
+        }
+
+        if filters["Torso"] == true {
+            connections.append(contentsOf: [
+                Connection(start: 11, end: 12),
+                Connection(start: 11, end: 23),
+                Connection(start: 12, end: 24),
+                Connection(start: 23, end: 24)
+            ])
+        }
+
+        if filters["Left Leg"] == true {
+            connections.append(contentsOf: [
+                Connection(start: 23, end: 25),
+                Connection(start: 25, end: 27),
+                Connection(start: 27, end: 29),
+                Connection(start: 27, end: 31)
+            ])
+        }
+
+        if filters["Right Leg"] == true {
+            connections.append(contentsOf: [
+                Connection(start: 24, end: 26),
+                Connection(start: 26, end: 28),
+                Connection(start: 28, end: 30),
+                Connection(start: 28, end: 32)
+            ])
+        }
+
+        return connections
     }
 }

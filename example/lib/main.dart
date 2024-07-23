@@ -15,7 +15,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MyApp(),
     );
   }
@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, CupertinoPageRoute(builder: (_) => PoseDetectionWidget()));
+          Navigator.push(context, CupertinoPageRoute(builder: (_) => const PoseDetectionWidget()));
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
