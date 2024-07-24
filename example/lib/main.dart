@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:thinksys_mediapipe_plugin/thinksys_mediapipe_plugin.dart';
-import 'package:thinksys_mediapipe_plugin_example/pose_detection_widget.dart';
+import 'package:thinksys_mediapipe_plugin_example/pose_example/pose_example.dart';
 
 void main() {
   runApp(const MyHomePage());
@@ -68,7 +65,7 @@ class _MyAppState extends State<MyApp> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, CupertinoPageRoute(builder: (_) => const PoseDetectionWidget()));
+          Navigator.push(context, CupertinoPageRoute(builder: (_) => const PoseExample()));
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

@@ -246,8 +246,8 @@ class OverlayView: UIView {
                   })
           } else {
               let connections = generateConnections(filters: filters!)
-              print("Filters : \(String(describing: filters))")
-              print("Connections : \(connections)")
+//              print("Filters : \(String(describing: filters))")
+//              print("Connections : \(connections)")
                          lines = connections.compactMap { connection in
                             let startIndex = dots[Int(connection.start)]
                             let endIndex = dots[Int(connection.end)]

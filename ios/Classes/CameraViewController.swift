@@ -75,9 +75,12 @@ class CameraViewController: UIViewController, FlutterStreamHandler {
         }
     }
     
-    init(messenger: FlutterBinaryMessenger) {
+    init(messenger: FlutterBinaryMessenger, arguments args: Any?) {
         super.init(nibName: nil, bundle: nil)
         setupEventChannel(messenger: messenger)
+        if(args != nil){
+            self.filters =  args as! [String: Bool]
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -154,7 +157,7 @@ class CameraViewController: UIViewController, FlutterStreamHandler {
     
     private func updateFilters(filters: [String: Bool]) {
 //       self.filters = filters
-        print("Items : \(filters)")
+//        print("Items : \(filters)")
         self.filters = filters
         self.initializePoseLandmarkerServiceOnSessionResumption()
        // Implement filter update logic
@@ -310,7 +313,7 @@ class CameraViewController: UIViewController, FlutterStreamHandler {
                 minTrackingConfidence: InferenceConfigurationManager.sharedInstance.minTrackingConfidence,
                 liveStreamDelegate: self,
                 delegate: InferenceConfigurationManager.sharedInstance.delegate)
-        print("Overlayservice : " + (InferenceConfigurationManager.sharedInstance.model.modelPath ?? "No path"))
+//        print("Overlayservice : " + (InferenceConfigurationManager.sharedInstance.model.modelPath ?? "No path"))
     }
     
     private func clearPoseLandmarkerServiceOnSessionInterruption() {
@@ -406,7 +409,7 @@ extension CameraViewController: PoseLandmarkerServiceLiveStreamDelegate {
             weakSelf.inferenceResultDeliveryDelegate?.didPerformInference(result: result)
             
             guard let poseLandmarkerResult = result?.poseLandmarkerResults.first as? PoseLandmarkerResult else {
-                print("No pose landmarks found")
+//                print("No pose landmarks found")
                 return
             }
             
@@ -445,7 +448,7 @@ extension CameraViewController: PoseLandmarkerServiceLiveStreamDelegate {
                 self?.sendPoseLandmarks(data: swiftDict)
 //                weakSelf.onLandmark?(swiftDict)
             } else {
-                print("No landmarks found")
+//                print("No landmarks found")
             }
             
             let imageSize = weakSelf.cameraFeedService.videoResolution

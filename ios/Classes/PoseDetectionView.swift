@@ -49,7 +49,7 @@ class FLNativeView: NSObject, FlutterPlatformView {
         arguments args: Any?,
         binaryMessenger messenger: FlutterBinaryMessenger?
     ) {
-        _camerViewController = CameraViewController(messenger: messenger!)
+        _camerViewController = CameraViewController(messenger: messenger!, arguments: args)
 //        _view = CameraView()
         _view = _camerViewController.view
 

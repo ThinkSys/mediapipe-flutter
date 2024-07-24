@@ -1,32 +1,27 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:thinksys_mediapipe_plugin/pose_landmark_options.dart';
 
 class LandmarksFilterOptions extends StatefulWidget {
-  final Function(Map<String, bool>) onFilterChange;
+  final Map<String, bool> defaultFilters;
+  final Function(String key, bool value) onFilterChange;
 
-  const LandmarksFilterOptions({super.key, required this.onFilterChange});
+  const LandmarksFilterOptions({super.key, required this.onFilterChange, required this.defaultFilters});
 
   @override
   LandmarksFilterOptionsState createState() => LandmarksFilterOptionsState();
 }
 
 class LandmarksFilterOptionsState extends State<LandmarksFilterOptions> {
-  Map<String, bool> filters = {
-    'Face': true,
-    'Left Arm': true,
-    'Right Arm': true,
-    'Torso': true,
-    'Left Leg': true,
-    'Right Leg': true,
-  };
+
 
   void _updateFilter(String key, bool value) {
     setState(() {
-      filters[key] = value;
+      widget.defaultFilters[key] = value;
     });
     print("SelectedFilter : $key : $value");
-    widget.onFilterChange(filters);
+    widget.onFilterChange(key, value);
   }
 
   @override
@@ -34,10 +29,10 @@ class LandmarksFilterOptionsState extends State<LandmarksFilterOptions> {
     return Scaffold(
       appBar: AppBar(title: const Text("Select filters"),),
       body: Column(
-        children: filters.keys.map((filter) {
+        children: widget.defaultFilters.keys.map((filter) {
           return CheckboxListTile(
             title: Text(filter),
-            value: filters[filter],
+            value: widget.defaultFilters[filter],
             onChanged: (value) {
               _updateFilter(filter, value!);
             },
