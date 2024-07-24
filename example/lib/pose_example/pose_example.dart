@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:thinksys_mediapipe_plugin/pose_landmarks.dart';
 import 'package:thinksys_mediapipe_plugin/pose_landmark_options.dart';
-import 'package:thinksys_mediapipe_plugin_example/landmarks_filter_options.dart';
+import 'package:thinksys_mediapipe_plugin_example/pose_example/landmarks_filter_options.dart';
 
 class PoseExample extends StatefulWidget {
   const PoseExample({super.key});
@@ -15,7 +15,6 @@ class _PoseExampleState extends State<PoseExample> {
   PoseLandmarkOptions options = PoseLandmarkOptions(
       face: true, leftArm: true, rightArm: true, leftLeg: true, torso: true, rightLeg: true);
 
-  /// TODO: enable realtime filters
   void _updateFilters(String key, bool value) {
     switch (key) {
       case "Face":
@@ -57,15 +56,31 @@ class _PoseExampleState extends State<PoseExample> {
                             defaultFilters: options.toJson(),
                           )));
                 },
-                child: Icon(Icons.settings_input_component_sharp))
+                child: const Icon(Icons.settings_input_component_sharp))
           ],
         ),
-        body: PoseLandmarks(
-          key: UniqueKey(),
-          options: options,
-          scanLandmarks: (value) {
-          //  print("Received Landmarks : $value");
-          },
+        body: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.5,
+              width: MediaQuery.of(context).size.width,
+              child: PoseLandmarks(
+                key: UniqueKey(),
+                options: PoseLandmarkOptions(),
+                scanLandmarks: (value) {
+                //  print("Received Landmarks : $value");
+                },
+              ),
+            ),
+            Container(
+              height: 70,
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.all(20),
+              margin: EdgeInsets.all(20),
+              color: Colors.blue,
+              child: Center(child: Text("Submit")),
+            )
+          ],
         ),
       ),
     );
