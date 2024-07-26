@@ -16,6 +16,8 @@ A new Flutter Plugin.
   s.source_files = 'Classes/**/*'
   s.resources        = 'Assets/**/*'
   s.dependency 'Flutter'
+  s.dependency 'MediaPipeTasksVision', '~> 0.10.14'  # Specify the version number
+  s.dependency 'MediaPipeTasksCommon', '~> 0.10.14'  # Specify the version number
   s.platform = :ios, '14.0'
 
   # Flutter.framework does not contain a i386 slice.
