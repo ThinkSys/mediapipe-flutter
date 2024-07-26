@@ -7,6 +7,20 @@ A Thinksys plugin for pose detection for Flutter framework.
 1. Take the pull from https://gitlab.thinksys.com/mediapipe/mediapipe-flutter.git repository
 2. For plugin git checkout plugin-implementation
 3. Navigate to ios folder in example directory : cd example/ios
+4. Open Podfile & add the dependency of MediaPipeTasksVision & MediaPipeTasksCommon
+ ```
+target 'Runner' do
+  use_frameworks!
+  pod 'MediaPipeTasksVision', '0.10.14' // Add this dependency
+  pod 'MediaPipeTasksCommon', '0.10.14' // Add this dependency
+  use_modular_headers!
+
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+  target 'RunnerTests' do
+    inherit! :search_paths
+  end
+end
+```
 4. do pod install
 5. This will install the required pods but will through an error  "[!] The 'Pods-Runner' target has frameworks with conflicting names: mediapipetaskscommon.xcframework and mediapipetasksvision.xcframework."
 6. Since pods installed in the example project but dependencies required in the plugin also so to remove this issue
