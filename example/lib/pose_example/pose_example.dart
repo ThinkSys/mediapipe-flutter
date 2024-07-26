@@ -59,28 +59,12 @@ class _PoseExampleState extends State<PoseExample> {
                 child: const Icon(Icons.settings_input_component_sharp))
           ],
         ),
-        body: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.5,
-              width: MediaQuery.of(context).size.width,
-              child: PoseLandmarks(
-                key: UniqueKey(),
-                options: PoseLandmarkOptions(),
-                scanLandmarks: (value) {
-                //  print("Received Landmarks : $value");
-                },
-              ),
-            ),
-            Container(
-              height: 70,
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(20),
-              margin: EdgeInsets.all(20),
-              color: Colors.blue,
-              child: Center(child: Text("Submit")),
-            )
-          ],
+        body: PoseLandmarks(
+          key: UniqueKey(),
+          options: PoseLandmarkOptions(),
+          poseLandmarks: (value) {
+            //  print("Received Landmarks : $value");
+          },
         ),
       ),
     );

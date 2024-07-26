@@ -6,9 +6,9 @@ import 'package:thinksys_mediapipe_plugin/pose_landmark_options.dart';
 
 class PoseLandmarks extends StatefulWidget {
   PoseLandmarkOptions? options;
-  Function(dynamic)? scanLandmarks;
+  Function(dynamic)? poseLandmarks;
 
-  PoseLandmarks({super.key, this.options, this.scanLandmarks}) {
+  PoseLandmarks({super.key, this.options, this.poseLandmarks}) {
     options ??= PoseLandmarkOptions();
   }
 
@@ -77,8 +77,8 @@ class _PoseLandmarksState extends State<PoseLandmarks> {
           creationParamsCodec: const StandardMessageCodec(),
           onPlatformViewCreated: (id) {
             poseLandmarksDataStream().listen((data) {
-              if (widget.scanLandmarks != null) {
-                widget.scanLandmarks!(data);
+              if (widget.poseLandmarks != null) {
+                widget.poseLandmarks!(data);
               }
 
               // print("Data $data");
