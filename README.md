@@ -31,7 +31,8 @@ First add the dependency in pubspec.yaml file :
 ## Code
 
 
-```PoseLandmarks(
+```
+PoseLandmarks(
 key: UniqueKey(),
 poseLandmarks: (value) {
 //  print("Received Landmarks : $value");
@@ -41,7 +42,8 @@ poseLandmarks: (value) {
 
 You can provide the options to enable/disable the landmarks on different parts of body : 
 
-```PoseLandmarks(
+```
+PoseLandmarks(
           key: UniqueKey(),
           options: PoseLandmarkOptions(
             face: true,
