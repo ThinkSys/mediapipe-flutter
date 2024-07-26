@@ -25,7 +25,8 @@ A Thinksys plugin for pose detection for Flutter framework.
 ## Usage
 
 First add the dependency in pubspec.yaml file : 
-   ```thinksys_mediapipe_plugin:
+   ```
+   thinksys_mediapipe_plugin:
           path: "path_of_plugin_in_system"
 ```
 ## Code
