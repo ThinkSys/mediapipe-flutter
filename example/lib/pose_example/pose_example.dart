@@ -61,7 +61,14 @@ class _PoseExampleState extends State<PoseExample> {
         ),
         body: PoseLandmarks(
           key: UniqueKey(),
-          options: PoseLandmarkOptions(),
+          options: PoseLandmarkOptions(
+            face: true,
+            leftLeg: false,
+            rightLeg: false,
+            leftArm: true,
+            rightArm: true,
+            torso: true
+          ),
           poseLandmarks: (value) {
             //  print("Received Landmarks : $value");
           },
