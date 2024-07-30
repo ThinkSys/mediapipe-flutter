@@ -34,12 +34,16 @@ class _PoseExampleState extends State<PoseExample> {
         break;
       case "rightLeg":
         options.rightLeg = value;
+        break;
       case "rightWrist":
         options.rightWrist = value;
+        break;
       case "leftWrist":
         options.leftWrist = value;
+        break;
       case "rightAnkle":
         options.rightAnkle = value;
+        break;
       case "leftAnkle":
         options.leftAnkle = value;
         break;
