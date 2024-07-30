@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:thinksys_mediapipe_plugin/core/enums/camera_facing.dart';
 import 'package:thinksys_mediapipe_plugin/pose_landmarks.dart';
 import 'package:thinksys_mediapipe_plugin/pose_landmark_options.dart';
 import 'package:thinksys_mediapipe_plugin_example/pose_example/landmarks_filter_options.dart';
@@ -74,6 +75,7 @@ class _PoseExampleState extends State<PoseExample> {
         body: PoseLandmarks(
           key: UniqueKey(),
           options: PoseLandmarkOptions(
+              cameraFacing: CameraFacing.front,
               face: true,
               leftLeg: true,
               rightLeg: true,

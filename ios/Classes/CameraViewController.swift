@@ -32,7 +32,7 @@ protocol InterfaceUpdatesDelegate: AnyObject {
  */
 class CameraViewController: UIViewController, FlutterStreamHandler {
     private var eventSink: FlutterEventSink?
-    private var filters: [String: Bool] = ["Right Leg": true, "Right Arm": true, "Left Arm": true, "Torso": true, "Left Leg": true, "Face": true]
+    private var filters: [String: Bool] = ["rightLeg": true, "rightArm": true, "leftArm": true, "torso": true, "leftLeg": true, "face": true, "leftWrist": true, "rightWrist": true,"leftAnkle": true, "rightAnkle": true, "isFrontCamera" : true]
     
     
     private struct Constants {
@@ -53,7 +53,7 @@ class CameraViewController: UIViewController, FlutterStreamHandler {
     
     // MARK: Controllers that manage functionality
     // Handles all the camera related functionality
-    private lazy var cameraFeedService = CameraFeedService(previewView: previewView)
+    private lazy var cameraFeedService = CameraFeedService(previewView: previewView, isFrontCamera: filters["isFrontCamera"] ?? true)
     
     private let poseLandmarkerServiceQueue = DispatchQueue(
         label: "com.google.mediapipe.cameraController.poseLandmarkerServiceQueue",
