@@ -17,23 +17,31 @@ class _PoseExampleState extends State<PoseExample> {
 
   void _updateFilters(String key, bool value) {
     switch (key) {
-      case "Face":
+      case "face":
         options.face = value;
         break;
-      case "Left Arm":
+      case "leftArm":
         options.leftArm = value;
         break;
-      case "Right Arm":
+      case "rightArm":
         options.rightArm = value;
         break;
-      case "Torso":
+      case "torso":
         options.torso = value;
         break;
-      case "Left Leg":
+      case "leftLeg":
         options.leftLeg = value;
         break;
-      case "Right Leg":
+      case "rightLeg":
         options.rightLeg = value;
+      case "rightWrist":
+        options.rightWrist = value;
+      case "leftWrist":
+        options.leftWrist = value;
+      case "rightAnkle":
+        options.rightAnkle = value;
+      case "leftAnkle":
+        options.leftAnkle = value;
         break;
     }
     setState(() {
