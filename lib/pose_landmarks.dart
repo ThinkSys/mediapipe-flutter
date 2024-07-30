@@ -54,6 +54,20 @@ class _PoseLandmarksState extends State<PoseLandmarks> {
 
   Widget cameraWidget() {
     switch (defaultTargetPlatform) {
+      case TargetPlatform.iOS:
+        return UiKitView(
+          viewType: viewType,
+          layoutDirection: TextDirection.ltr,
+          creationParams: widget.options?.toJson(),
+          creationParamsCodec: const StandardMessageCodec(),
+          onPlatformViewCreated: (id) {
+            poseLandmarksDataStream().listen((data) {
+              if (widget.poseLandmarks != null) {
+                widget.poseLandmarks!(data);
+              }
+            });
+          },
+        );
       case TargetPlatform.android:
         return const Center(
           child: Text("This platform is not supported yet."),
@@ -69,22 +83,6 @@ class _PoseLandmarksState extends State<PoseLandmarks> {
       //     print("platform view created : $viewId");
       //   },
       // );
-      case TargetPlatform.iOS:
-        return UiKitView(
-          viewType: viewType,
-          layoutDirection: TextDirection.ltr,
-          creationParams: widget.options?.toJson(),
-          creationParamsCodec: const StandardMessageCodec(),
-          onPlatformViewCreated: (id) {
-            poseLandmarksDataStream().listen((data) {
-              if (widget.poseLandmarks != null) {
-                widget.poseLandmarks!(data);
-              }
-
-              // print("Data $data");
-            });
-          },
-        );
       default:
         return const Center(
           child: Text("This platform is not supported yet."),

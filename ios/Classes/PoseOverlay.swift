@@ -266,7 +266,7 @@ class OverlayView: UIView {
    static func generateConnections(filters: [String: Bool]) -> [Connection] {
         var connections: [Connection] = []
 
-        if filters["Face"] == true {
+        if filters["face"] == true {
             connections.append(contentsOf: [
                 Connection(start: 0, end: 1),
                 Connection(start: 1, end: 2),
@@ -280,27 +280,37 @@ class OverlayView: UIView {
             ])
         }
 
-        if filters["Left Arm"] == true {
+        if filters["leftArm"] == true {
             connections.append(contentsOf: [
                 Connection(start: 11, end: 13),
-                Connection(start: 13, end: 15),
+                Connection(start: 13, end: 15)
+            ])
+        }
+
+        if filters["rightArm"] == true {
+            connections.append(contentsOf: [
+                Connection(start: 12, end: 14),
+                Connection(start: 14, end: 16)
+            ])
+        }
+
+        if filters["leftWrist"] == true {
+            connections.append(contentsOf: [
                 Connection(start: 15, end: 17),
                 Connection(start: 15, end: 19),
                 Connection(start: 15, end: 21)
             ])
         }
 
-        if filters["Right Arm"] == true {
+        if filters["rightWrist"] == true {
             connections.append(contentsOf: [
-                Connection(start: 12, end: 14),
-                Connection(start: 14, end: 16),
                 Connection(start: 16, end: 18),
                 Connection(start: 16, end: 20),
                 Connection(start: 16, end: 22)
             ])
         }
 
-        if filters["Torso"] == true {
+        if filters["torso"] == true {
             connections.append(contentsOf: [
                 Connection(start: 11, end: 12),
                 Connection(start: 11, end: 23),
@@ -309,19 +319,29 @@ class OverlayView: UIView {
             ])
         }
 
-        if filters["Left Leg"] == true {
+        if filters["leftLeg"] == true {
             connections.append(contentsOf: [
                 Connection(start: 23, end: 25),
-                Connection(start: 25, end: 27),
+                Connection(start: 25, end: 27)
+            ])
+        }
+
+        if filters["rightLeg"] == true {
+            connections.append(contentsOf: [
+                Connection(start: 24, end: 26),
+                Connection(start: 26, end: 28)
+            ])
+        }
+
+        if filters["leftAnkle"] == true {
+            connections.append(contentsOf: [
                 Connection(start: 27, end: 29),
                 Connection(start: 27, end: 31)
             ])
         }
 
-        if filters["Right Leg"] == true {
+        if filters["rightAnkle"] == true {
             connections.append(contentsOf: [
-                Connection(start: 24, end: 26),
-                Connection(start: 26, end: 28),
                 Connection(start: 28, end: 30),
                 Connection(start: 28, end: 32)
             ])
@@ -329,4 +349,5 @@ class OverlayView: UIView {
 
         return connections
     }
+
 }
