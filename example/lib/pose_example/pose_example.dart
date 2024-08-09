@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:thinksys_mediapipe_plugin/core/enums/camera_facing.dart';
+import 'package:thinksys_mediapipe_plugin/core/enums/camera_orientation.dart';
 import 'package:thinksys_mediapipe_plugin/pose_landmarks.dart';
 import 'package:thinksys_mediapipe_plugin/pose_landmark_options.dart';
 import 'package:thinksys_mediapipe_plugin_example/pose_example/landmarks_filter_options.dart';
@@ -58,39 +59,47 @@ class _PoseExampleState extends State<PoseExample> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Camera View"),
-          actions: [
-            GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(CupertinoPageRoute(
-                      builder: (_) => LandmarksFilterOptions(
-                            onFilterChange: _updateFilters,
-                            defaultFilters: options.toJson(),
-                          )));
-                },
-                child: const Icon(Icons.settings_input_component_sharp))
-          ],
-        ),
-        body: PoseLandmarks(
-          key: UniqueKey(),
-          options: PoseLandmarkOptions(
-              cameraFacing: CameraFacing.front,
-              face: true,
-              leftLeg: true,
-              rightLeg: true,
-              leftArm: true,
-              rightArm: true,
-              torso: true,
-              rightAnkle: true,
-              leftAnkle: true,
-              rightWrist: true,
-              leftWrist: true),
-          poseLandmarks: (value) {
-            //  print("Received Landmarks : $value");
-          },
-        ),
-      ),
+          appBar: AppBar(
+            title: const Text("Camera View"),
+            actions: [
+              GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (_) => LandmarksFilterOptions(
+                              onFilterChange: _updateFilters,
+                              defaultFilters: options.toJson(),
+                            )));
+                  },
+                  child: const Icon(Icons.settings_input_component_sharp))
+            ],
+          ),
+          body: poseLandmarks()),
     );
+  }
+
+  Widget poseLandmarks() {
+    return OrientationBuilder(builder: (_, orientation) {
+      return PoseLandmarks(
+        key: UniqueKey(),
+        options: PoseLandmarkOptions(
+            cameraFacing: CameraFacing.front,
+            cameraOrientation: orientation == Orientation.portrait
+                ? CameraOrientation.portrait
+                : CameraOrientation.landscape,
+            face: true,
+            leftLeg: true,
+            rightLeg: true,
+            leftArm: true,
+            rightArm: true,
+            torso: true,
+            rightAnkle: true,
+            leftAnkle: true,
+            rightWrist: true,
+            leftWrist: true),
+        poseLandmarks: (value) {
+          //  print("Received Landmarks : $value");
+        },
+      );
+    });
   }
 }

@@ -1,0 +1,6 @@
+
+
+enum CameraOrientation{
+  portrait,
+  landscape
+}

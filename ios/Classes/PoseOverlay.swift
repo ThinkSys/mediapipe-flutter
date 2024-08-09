@@ -39,13 +39,14 @@ class OverlayView: UIView {
   private var orientation = UIDeviceOrientation.portrait
 
   private var edgeOffset: CGFloat = 0.0
+    private var isPortrait: Bool = true
 
   // MARK: Public Functions
   func draw(
     poseOverlays: [PoseOverlay],
     inBoundsOfContentImageOfSize imageSize: CGSize,
     edgeOffset: CGFloat = 0.0,
-    imageContentMode: UIView.ContentMode) {
+    imageContentMode: UIView.ContentMode, isPortrait: Bool) {
 
       self.clear()
       contentImageSize = imageSize
@@ -53,7 +54,9 @@ class OverlayView: UIView {
       self.poseOverlays = poseOverlays
       self.imageContentMode = imageContentMode
       orientation = UIDevice.current.orientation
+        self.isPortrait = isPortrait
       self.setNeedsDisplay()
+    
     }
 
   func redrawPoseOverlays(forNewDeviceOrientation deviceOrientation:UIDeviceOrientation) {
@@ -224,14 +227,29 @@ class OverlayView: UIView {
       for poseLandmarks in landmarks {
         var transformedPoseLandmarks: [CGPoint]!
 
-        switch orientation {
-        case .left:
-          transformedPoseLandmarks = poseLandmarks.map({CGPoint(x: CGFloat($0.y), y: 1 - CGFloat($0.x))})
-        case .right:
-          transformedPoseLandmarks = poseLandmarks.map({CGPoint(x: 1 - CGFloat($0.y), y: CGFloat($0.x))})
-        default:
-          transformedPoseLandmarks = poseLandmarks.map({CGPoint(x: CGFloat($0.x), y: CGFloat($0.y))})
-        }
+//        switch orientation {
+//        case .left:
+//          transformedPoseLandmarks = poseLandmarks.map({CGPoint(x: CGFloat($0.y), y: 1 - CGFloat($0.x))})
+//        case .right:
+//          transformedPoseLandmarks = poseLandmarks.map({CGPoint(x: 1 - CGFloat($0.y), y: CGFloat($0.x))})
+//        default:
+//          transformedPoseLandmarks = poseLandmarks.map({CGPoint(x: CGFloat($0.x), y: CGFloat($0.y))})
+//        }
+          
+          switch orientation {
+                case .left:
+              if filters!["isPortrait"]!{
+                    transformedPoseLandmarks = poseLandmarks.map { CGPoint(x: CGFloat($0.y), y: 1 - CGFloat($0.x)) }
+                  }else{
+                    transformedPoseLandmarks = poseLandmarks.map { CGPoint(x: CGFloat($0.x), y: CGFloat($0.y)) }
+                  }
+                
+                case .right:
+                    transformedPoseLandmarks = poseLandmarks.map { CGPoint(x: 1 - CGFloat($0.y), y: CGFloat($0.x)) }
+
+                       default:
+                  transformedPoseLandmarks = poseLandmarks.map { CGPoint(x: CGFloat($0.x), y: CGFloat($0.y)) }
+                       }
 
         let dots: [CGPoint] = transformedPoseLandmarks.map({CGPoint(x: CGFloat($0.x) * originalImageSize.width * offsetsAndScaleFactor.scaleFactor + offsetsAndScaleFactor.xOffset, y: CGFloat($0.y) * originalImageSize.height * offsetsAndScaleFactor.scaleFactor + offsetsAndScaleFactor.yOffset)})
           

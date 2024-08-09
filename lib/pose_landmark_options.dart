@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:thinksys_mediapipe_plugin/core/enums/camera_facing.dart';
+import 'package:thinksys_mediapipe_plugin/core/enums/camera_orientation.dart';
 
 class PoseLandmarkOptions extends Equatable {
   CameraFacing cameraFacing;
+  CameraOrientation cameraOrientation;
   bool face;
   bool leftArm;
   bool rightArm;
@@ -16,6 +18,7 @@ class PoseLandmarkOptions extends Equatable {
 
   PoseLandmarkOptions(
       {this.cameraFacing = CameraFacing.front,
+      this.cameraOrientation = CameraOrientation.portrait,
       this.face = true,
       this.leftArm = true,
       this.rightArm = true,
@@ -38,7 +41,8 @@ class PoseLandmarkOptions extends Equatable {
         'rightLeg': rightLeg,
         "leftAnkle": leftAnkle,
         "rightAnkle": rightAnkle,
-        "isFrontCamera": cameraFacing == CameraFacing.front
+        "isFrontCamera": cameraFacing == CameraFacing.front,
+        "isPortrait": cameraOrientation == CameraOrientation.portrait
       };
 
   @override
@@ -54,6 +58,7 @@ class PoseLandmarkOptions extends Equatable {
         rightLeg,
         leftAnkle,
         rightAnkle,
-        cameraFacing
+        cameraFacing,
+        cameraOrientation
       ];
 }

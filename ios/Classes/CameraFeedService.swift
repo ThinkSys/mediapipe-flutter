@@ -56,21 +56,28 @@ class CameraFeedService: NSObject {
   // MARK: Public Instance Variables
   var videoResolution: CGSize {
     get {
-      guard let size = imageBufferSize else {
-        return CGSize.zero
-      }
-      let minDimension = min(size.width, size.height)
-      let maxDimension = max(size.width, size.height)
-      switch UIDevice.current.orientation {
-      case .portrait:
-        return CGSize(width: minDimension, height: maxDimension)
-      case .landscapeLeft:
-        fallthrough
-      case .landscapeRight:
-        return CGSize(width: maxDimension, height: minDimension)
-      default:
-        return CGSize(width: minDimension, height: maxDimension)
-      }
+        guard let size = imageBufferSize else {
+          return CGSize.zero
+        }
+        let minDimension = min(size.width, size.height)
+        let maxDimension = max(size.width, size.height)
+        
+        if self.isPortrait{
+                switch UIDevice.current.orientation {
+                case .portrait:
+                  return CGSize(width: minDimension, height: maxDimension)
+                case .landscapeLeft:
+                  fallthrough
+                case .landscapeRight:
+                  return CGSize(width: maxDimension, height: minDimension)
+                default:
+                  return CGSize(width: minDimension, height: maxDimension)
+                }
+        }else {
+          return  CGSize(width: maxDimension, height: minDimension)
+        }
+        
+        
     }
   }
   
@@ -86,15 +93,17 @@ class CameraFeedService: NSObject {
   private lazy var videoDataOutput = AVCaptureVideoDataOutput()
   private var isSessionRunning = false
   private var imageBufferSize: CGSize?
+    private var isPortrait:Bool = true
   
   
   // MARK: CameraFeedServiceDelegate
   weak var delegate: CameraFeedServiceDelegate?
   
   // MARK: Initializer
-    init(previewView: UIView, isFrontCamera : Bool) {
+    init(previewView: UIView, isFrontCamera : Bool, isPortrait : Bool) {
     super.init()
         cameraPosition = isFrontCamera ? .front : .back
+        self.isPortrait = isPortrait
     // Initializes the session
     session.sessionPreset = .high
     setUpPreviewView(previewView)
@@ -112,23 +121,29 @@ class CameraFeedService: NSObject {
   
   private func setUpPreviewView(_ view: UIView) {
     videoPreviewLayer.videoGravity = videoGravity
-    videoPreviewLayer.connection?.videoOrientation = .portrait
+      if(self.isPortrait){
+        videoPreviewLayer.connection?.videoOrientation =  .portrait
+      }else{
+        videoPreviewLayer.connection?.videoOrientation =  .landscapeRight
+      }
     view.layer.addSublayer(videoPreviewLayer)
   }
   
-  // MARK: notification methods
-  @objc func orientationChanged(notification: Notification) {
-    switch UIImage.Orientation.from(deviceOrientation: UIDevice.current.orientation) {
-    case .up:
-      videoPreviewLayer.connection?.videoOrientation = .portrait
-    case .left:
-      videoPreviewLayer.connection?.videoOrientation = .landscapeRight
-    case .right:
-      videoPreviewLayer.connection?.videoOrientation = .landscapeLeft
-    default:
-      break
+    // MARK: notification methods
+    @objc func orientationChanged(notification: Notification) {
+      if isPortrait {
+        switch UIImage.Orientation.from(deviceOrientation: UIDevice.current.orientation) {
+        case .up:
+          videoPreviewLayer.connection?.videoOrientation = .portrait
+        case .left:
+          videoPreviewLayer.connection?.videoOrientation = .landscapeRight
+        case .right:
+          videoPreviewLayer.connection?.videoOrientation = .landscapeLeft
+        default:
+          break
+        }
+      }
     }
-  }
   
   // MARK: Session Start and End methods
   
@@ -162,6 +177,10 @@ class CameraFeedService: NSObject {
     }
     
   }
+    
+    func setOrientation( isPortrait: Bool) {
+      self.isPortrait = isPortrait
+    }
   
   /**
    This method resumes an interrupted AVCaptureSession.
@@ -226,7 +245,6 @@ class CameraFeedService: NSObject {
       completion(granted)
     }
   }
-  
   
   /**
    This method handles all the steps to configure an AVCaptureSession.
@@ -294,12 +312,21 @@ class CameraFeedService: NSObject {
     
     if session.canAddOutput(videoDataOutput) {
       session.addOutput(videoDataOutput)
-      videoDataOutput.connection(with: .video)?.videoOrientation = .portrait
+        
+        if(self.isPortrait){
+            videoDataOutput.connection(with: .video)?.videoOrientation = .portrait
+        } else {
+            videoDataOutput.connection(with: .video)?.videoOrientation = .landscapeRight
+        }
       if videoDataOutput.connection(with: .video)?.isVideoOrientationSupported == true
           && cameraPosition == .front {
         videoDataOutput.connection(with: .video)?.isVideoMirrored = true
       }
-      return true
+        if !self.isPortrait {
+          videoPreviewLayer.connection?.videoOrientation = .landscapeRight
+        }
+      
+        return true
     }
     return false
   }

@@ -53,7 +53,7 @@ class CameraViewController: UIViewController, FlutterStreamHandler {
     
     // MARK: Controllers that manage functionality
     // Handles all the camera related functionality
-    private lazy var cameraFeedService = CameraFeedService(previewView: previewView, isFrontCamera: filters["isFrontCamera"] ?? true)
+    private lazy var cameraFeedService = CameraFeedService(previewView: previewView, isFrontCamera: filters["isFrontCamera"] ?? true, isPortrait: filters["isPortrait"] ?? true)
     
     private let poseLandmarkerServiceQueue = DispatchQueue(
         label: "com.google.mediapipe.cameraController.poseLandmarkerServiceQueue",
@@ -463,7 +463,7 @@ extension CameraViewController: PoseLandmarkerServiceLiveStreamDelegate {
             
             weakSelf.overlayView.draw(poseOverlays: poseOverlays,
                                       inBoundsOfContentImageOfSize: imageSize,
-                                      imageContentMode: weakSelf.cameraFeedService.videoGravity.contentMode)
+                                      imageContentMode: weakSelf.cameraFeedService.videoGravity.contentMode, isPortrait: (self?.filters["isPortrait"])!)
         }
     }
 }
