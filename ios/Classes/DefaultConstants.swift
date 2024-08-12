@@ -27,9 +27,9 @@ struct DefaultConstants {
   static let lineColor = UIColor(red: 0, green: 127/255.0, blue: 139/255.0, alpha: 1)
 
   static var numPoses: Int = 1
-  static var minPoseDetectionConfidence: Float = 0.5
-  static var minPosePresenceConfidence: Float = 0.5
-  static var minTrackingConfidence: Float = 0.5
+  static var minPoseDetectionConfidence: Float = 0.7
+  static var minPosePresenceConfidence: Float = 0.7
+  static var minTrackingConfidence: Float = 0.7
   static let model: Model = .pose_landmarker_full
   static let delegate: PoseLandmarkerDelegate = .CPU
 }
