@@ -1,5 +1,5 @@
 name: thinksys_mediapipe_plugin
-description: "A new Flutter Plugin."
+description: "A pose detection mediapipe plugin which uses Mediapipe for pose detection."
 version: 0.0.1
 homepage:
 
@@ -43,15 +43,7 @@ flutter:
         pluginClass: ThinksysMediapipePlugin
       ios:
         pluginClass: ThinksysMediapipePlugin
-      linux:
-        pluginClass: ThinksysMediapipePlugin
-      macos:
-        pluginClass: ThinksysMediapipePlugin
-      windows:
-        pluginClass: ThinksysMediapipePluginCApi
-      web:
-        pluginClass: ThinksysMediapipePluginWeb
-        fileName: thinksys_mediapipe_plugin_web.dart
+
 
   # To add assets to your plugin package, add an assets section, like this:
 #  assets:
