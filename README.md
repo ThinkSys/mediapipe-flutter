@@ -7,6 +7,10 @@ The Thinksys Pose Detection Plugin is a Flutter package that integrates with Med
   <img src="https://i.ibb.co/L1FNt92/thinksys-logo.png" alt="thinksys-logo" style="width: 200px; height: 100px;">
 </div>
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/felangel/bloc/master/assets/logos/flutter_bloc.png" height="100" alt="Flutter Bloc Package" />
+</p>
+
 
 
 ## Setup
