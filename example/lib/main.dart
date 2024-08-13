@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:thinksys_mediapipe_plugin/thinksys_mediapipe_plugin.dart';
-import 'package:thinksys_mediapipe_plugin_example/pose_example/pose_example.dart';
+import 'package:thinksys_mediapipe_plugin/pose_detection.dart';
+import 'package:thinksys_mediapipe_plugin_example/pose_example/landmarks_filter_options.dart';
 
 void main() {
   runApp(const MyHomePage());
@@ -13,66 +13,105 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MyApp(),
+      home: PoseExample(),
     );
   }
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class PoseExample extends StatefulWidget {
+  const PoseExample({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<PoseExample> createState() => _PoseExampleState();
 }
 
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _thinksysMediapipePlugin = ThinksysMediapipePlugin();
+class _PoseExampleState extends State<PoseExample> {
+  PoseLandmarkOptions options = PoseLandmarkOptions(
+      face: true, leftArm: true, rightArm: true, leftLeg: true, torso: true, rightLeg: true);
 
-  @override
-  void initState() {
-    super.initState();
-    // initPlatformState();
+  void _updateFilters(String key, bool value) {
+    switch (key) {
+      case "face":
+        options.face = value;
+        break;
+      case "leftArm":
+        options.leftArm = value;
+        break;
+      case "rightArm":
+        options.rightArm = value;
+        break;
+      case "torso":
+        options.torso = value;
+        break;
+      case "leftLeg":
+        options.leftLeg = value;
+        break;
+      case "rightLeg":
+        options.rightLeg = value;
+        break;
+      case "rightWrist":
+        options.rightWrist = value;
+        break;
+      case "leftWrist":
+        options.leftWrist = value;
+        break;
+      case "rightAnkle":
+        options.rightAnkle = value;
+        break;
+      case "leftAnkle":
+        options.leftAnkle = value;
+        break;
+    }
+    setState(() {
+      // print("Updated key : $key, $value");
+    });
   }
-
-  // // Platform messages are asynchronous, so we initialize in an async method.
-  // Future<void> initPlatformState() async {
-  //   String platformVersion;
-  //   // Platform messages may fail, so we use a try/catch PlatformException.
-  //   // We also handle the message potentially returning null.
-  //   try {
-  //     platformVersion =
-  //         await _thinksysMediapipePlugin.getPlatformVersion() ?? 'Unknown platform version';
-  //   } on PlatformException {
-  //     platformVersion = 'Failed to get platform version.';
-  //   }
-  //
-  //   // If the widget was removed from the tree while the asynchronous platform
-  //   // message was in flight, we want to discard the reply rather than calling
-  //   // setState to update our non-existent appearance.
-  //   if (!mounted) return;
-  //
-  //   setState(() {
-  //     _platformVersion = platformVersion;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Plugin example app'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, CupertinoPageRoute(builder: (_) => const PoseExample()));
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-      body: Center(
-        child: Text('Running on: $_platformVersion\n'),
-      ),
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Camera View"),
+            actions: [
+              GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (_) => LandmarksFilterOptions(
+                              onFilterChange: _updateFilters,
+                              defaultFilters: options.toJson(),
+                            )));
+                  },
+                  child: const Icon(Icons.settings_input_component_sharp))
+            ],
+          ),
+          body: poseLandmarks()),
     );
+  }
+
+  Widget poseLandmarks() {
+    return OrientationBuilder(builder: (_, orientation) {
+      return PoseLandmarks(
+        key: UniqueKey(),
+        options: PoseLandmarkOptions(
+            cameraFacing: CameraFacing.front,
+            cameraOrientation: orientation == Orientation.portrait
+                ? CameraOrientation.portrait
+                : CameraOrientation.landscape,
+            face: true,
+            leftLeg: true,
+            rightLeg: true,
+            leftArm: true,
+            rightArm: true,
+            torso: true,
+            rightAnkle: true,
+            leftAnkle: true,
+            rightWrist: true,
+            leftWrist: true),
+        poseLandmarks: (value) {
+          //  print("Received Landmarks : $value");
+        },
+      );
+    });
   }
 }
