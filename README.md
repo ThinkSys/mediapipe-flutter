@@ -3,11 +3,12 @@
 
 The Thinksys Pose Detection Plugin is a Flutter package that integrates with MediaPipe to provide real-time pose detection capabilities specifically for iOS applications. This plugin allows developers to easily track and analyze human poses, enabling features such as fitness tracking, gesture recognition, and more. With seamless integration and high-performance detection, it's an ideal tool for building interactive and motion-based iOS applications.
 
-<div style="text-align: center;">
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
   <a href="https://ibb.co/TtfW8PF">
     <img src="https://i.ibb.co/L1FNt92/thinksys-logo.png" alt="thinksys-logo" border="0" style="width: 200px; height: 100px;">
   </a>
 </div>
+
 
 ## Setup
 
