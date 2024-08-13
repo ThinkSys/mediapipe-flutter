@@ -1,6 +1,13 @@
-# thinksys_mediapipe_plugin
+
+# Thinksys Mediapipe Plugin
 
 A Thinksys plugin for pose detection for Flutter framework.
+
+<a href="https://ibb.co/TtfW8PF"><img src="https://i.ibb.co/L1FNt92/thinksys-logo.png" alt="thinksys-logo" border="0"></a>
+
+<a href="https://ibb.co/TtfW8PF"><img src="https://i.ibb.co/TtfW8PF/thinksys-logo.png" alt="thinksys-logo" border="0"></a>
+
+<a href='https://postimg.cc/MXxFB53Z' target='_blank'><img src='https://i.postimg.cc/1RNhLYpF/thinksys-logo.png' border='0' alt='thinksys-logo'/></a>
 
 ## Setup Steps
 
@@ -25,7 +32,7 @@ poseLandmarks: (value) {
 )
 ````
 
-You can provide the options to enable/disable the landmarks on different parts of body : 
+You can provide the options to enable/disable the landmarks on different parts of body :
 
 ````
 PoseLandmarks(
@@ -43,3 +50,4 @@ PoseLandmarks(
           },
         )
 ````
+
