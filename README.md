@@ -55,6 +55,10 @@ PoseLandmarks(
 )
 ````
 
+## License
+
+This project is licensed under a custom MIT License with restrictions - see the [LICENSE](LICENSE) file for details.
+
 
 ## 🔗 Links
 [![thinksys](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://thinksys.com/)
