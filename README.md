@@ -1,7 +1,7 @@
 
 # Thinksys Mediapipe Plugin
 
-A Thinksys plugin for pose detection for Flutter framework.
+The Thinksys Pose Detection Plugin is a Flutter package that integrates with MediaPipe to provide real-time pose detection capabilities specifically for iOS applications. This plugin allows developers to easily track and analyze human poses, enabling features such as fitness tracking, gesture recognition, and more. With seamless integration and high-performance detection, it's an ideal tool for building interactive and motion-based iOS applications.
 
 <div style="text-align: center;">
   <a href="https://ibb.co/TtfW8PF">
@@ -9,46 +9,56 @@ A Thinksys plugin for pose detection for Flutter framework.
   </a>
 </div>
 
+## Setup
 
-## Setup Steps
+1. First add the dependency in pubspec.yaml file & do run flutter pub get in terminal
+     ```
+     dependencies:
+        thinksys_mediapipe_plugin: 0.0.1
 
-1. Take the pull from https://gitlab.thinksys.com/mediapipe/mediapipe-flutter.git repository
-2. For plugin ``git checkout plugin-implementation``
-3. First add the dependency in pubspec.yaml file & do run flutter pub get in terminal
-     ````
-   thinksys_mediapipe_plugin:
-          path: "path_of_plugin_in_system"
-     ````
-4. Add ``NSCameraUsageDescription`` permission in Info.plist in example/ios or in your project
-5. Run the example/main.dart or run the main.dart of your project
+     ```
+4. Add camera usage permission in Info.plist in example/ios
+    ```
+    <key>NSCameraUsageDescription</key>
+	<string>This app uses camera to get pose landmarks that appear in the camera feed.</string>
+    ```
+5. Run ``` flutter pub get ```
 
-## Code
+## Usage
 
-````
+```
+import 'package:thinksys_mediapipe_plugin/pose_detection.dart';
+
 PoseLandmarks(
 key: UniqueKey(),
 poseLandmarks: (value) {
-//  print("Received Landmarks : $value");
-},
+  print("Received Landmarks : $value");
+    },
 )
-````
+```
 
-You can provide the options to enable/disable the landmarks on different parts of body :
+You can also provide the options to enable/disable the landmarks on different parts of body :
 
 ````
 PoseLandmarks(
-          key: UniqueKey(),
-          options: PoseLandmarkOptions(
-            face: true,
-            leftLeg: false,
-            rightLeg: false,
-            leftArm: true,
-            rightArm: true,
-            torso: true
-          ),
-          poseLandmarks: (value) {
-            //  print("Received Landmarks : $value");
-          },
-        )
+    key: UniqueKey(),
+    options: PoseLandmarkOptions(
+    face: true,
+    leftLeg: false,
+    rightLeg: false,
+    leftArm: true,
+    rightArm: true,
+    torso: true),
+    poseLandmarks: (value) {
+        print("Received Landmarks : $value");
+    },
+)
 ````
+
+
+## 🔗 Links
+[![thinksys](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://thinksys.com/)
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://in.linkedin.com/company/thinksys-inc)
+
 

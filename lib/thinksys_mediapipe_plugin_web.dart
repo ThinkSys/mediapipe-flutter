@@ -17,10 +17,4 @@ class ThinksysMediapipePluginWeb extends ThinksysMediapipePluginPlatform {
     ThinksysMediapipePluginPlatform.instance = ThinksysMediapipePluginWeb();
   }
 
-  /// Returns a [String] containing the version of the platform.
-  @override
-  Future<String?> getPlatformVersion() async {
-    final version = web.window.navigator.userAgent;
-    return version;
-  }
 }

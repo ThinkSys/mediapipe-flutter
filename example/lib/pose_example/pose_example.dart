@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:thinksys_mediapipe_plugin/core/enums/camera_facing.dart';
-import 'package:thinksys_mediapipe_plugin/core/enums/camera_orientation.dart';
-import 'package:thinksys_mediapipe_plugin/pose_landmarks.dart';
-import 'package:thinksys_mediapipe_plugin/pose_landmark_options.dart';
+import 'package:thinksys_mediapipe_plugin/pose_detection.dart';
+
 import 'package:thinksys_mediapipe_plugin_example/pose_example/landmarks_filter_options.dart';
 
 class PoseExample extends StatefulWidget {
@@ -51,7 +49,7 @@ class _PoseExampleState extends State<PoseExample> {
         break;
     }
     setState(() {
-      print("Updated key : $key, $value");
+      // print("Updated key : $key, $value");
     });
   }
 
