@@ -1,0 +1,34 @@
+PODS:
+  - Flutter (1.0.0)
+  - MediaPipeTasksCommon (0.10.14)
+  - MediaPipeTasksVision (0.10.14):
+    - MediaPipeTasksCommon (= 0.10.14)
+  - thinksys_mediapipe_plugin (0.0.1):
+    - Flutter
+    - MediaPipeTasksCommon (~> 0.10.14)
+    - MediaPipeTasksVision (~> 0.10.14)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - thinksys_mediapipe_plugin (from `.symlinks/plugins/thinksys_mediapipe_plugin/ios`)
+
+SPEC REPOS:
+  trunk:
+    - MediaPipeTasksCommon
+    - MediaPipeTasksVision
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  thinksys_mediapipe_plugin:
+    :path: ".symlinks/plugins/thinksys_mediapipe_plugin/ios"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  MediaPipeTasksCommon: 5660099c2dd81f7ac4a7a5f51055785ead8e0e64
+  MediaPipeTasksVision: 0fac0db83c0b45e4d7811a9227be5e571403cf83
+  thinksys_mediapipe_plugin: f943d01a0c8a38fa80f6ba63e777ad023b6f964a
+
+PODFILE CHECKSUM: 7bb08e8bd89bec0588bdb44b8f8bbb6ec0b86ee0
+
+COCOAPODS: 1.15.2
