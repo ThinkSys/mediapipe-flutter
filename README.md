@@ -21,11 +21,9 @@ The Thinksys Pose Detection Plugin is a Flutter package that integrates with Med
 	<string>This app uses camera to get pose landmarks that appear in the camera feed.</string>
     ```
    
-3. You need to add ```[pose_landmarker_full.task](example/ios/pose_landmarker_full.task)``` file in your project at following path ```yourProject/ios```
+3. Run ```cd ios && pod install```
 
-4. Run ```cd ios && pod install```
-
-5. Run ``` flutter pub get ```
+4. Run ``` flutter pub get ```
 
 ## Usage
 
