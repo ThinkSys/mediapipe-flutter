@@ -12,7 +12,7 @@ The Thinksys Pose Detection Plugin is a Flutter package that integrates with Med
 1. First add the dependency in ```pubspec.yaml``` file & do run ```flutter pub get``` in terminal
      ```
      dependencies:
-        thinksys_mediapipe_plugin: 0.0.1
+        thinksys_mediapipe_plugin: ^0.0.5
 
      ```
 2. Add camera usage permission in Info.plist in example/ios
