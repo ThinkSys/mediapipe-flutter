@@ -1,3 +1,7 @@
+## [0.0.6]
+### Changed
+- Updated the `README.md` file.
+
 ## [0.0.5] 
 ### Changed
 - Added model files.
