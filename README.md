@@ -38,7 +38,7 @@ poseLandmarks: (value) {
 )
 ```
 
-You can also provide the options to enable/disable the landmarks on different parts of body :
+You can also provide the options to enable/disable the landmarks on different parts of body:
 
 ````
 PoseLandmarks(
