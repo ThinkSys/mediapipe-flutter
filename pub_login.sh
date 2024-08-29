@@ -19,11 +19,10 @@ if [ -z "${PUB_DEV_PUBLISH_EXPIRATION}" ]; then
 fi
 
 # Create .pub-cache directory if it doesn't exist
-mkdir -p ~/.pub-cache
+mkdir -p ~/.config/dart
 
 # Create credentials.json file.
-cat <<EOF > ~/.pub-cache/credentials.json
-{
+cat <<EOF > ~/.config/dart/pub-credentials.json
   "accessToken":"${PUB_DEV_PUBLISH_ACCESS_TOKEN}",
   "refreshToken":"${PUB_DEV_PUBLISH_REFRESH_TOKEN}",
   "tokenEndpoint":"${PUB_DEV_PUBLISH_TOKEN_ENDPOINT}",

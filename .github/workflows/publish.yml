@@ -39,7 +39,7 @@ jobs:
       #   run: flutter pub publish --dry-run
 
       - name: Debug Credentials
-        run: cat ~/.pub-cache/credentials.json
+        run: cat ~/.config/dart/pub-credentials.json
 
       - name: Publish Package
-        run: flutter pub publish -f --credentials ~/.pub-cache/credentials.json
+        run: flutter pub publish -f
