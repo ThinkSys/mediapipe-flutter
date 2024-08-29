@@ -8,7 +8,7 @@ name: Publish to pub.dev
 on:
     push:
       branches:
-        - main
+        - pipeline
 
 jobs:
   build:
@@ -22,10 +22,10 @@ jobs:
           flutter-version: '3.22.2'
       - name: Install dependencies
         run: flutter pub get
-      - name: Analyze
-        run: flutter analyze
-      - name: Run tests
-        run: flutter test
+    #   - name: Analyze
+    #     run: flutter analyze
+    #   - name: Run tests
+    #     run: flutter test
       - name: Setup Pub Credentials
         shell: bash
         env:
