@@ -4,7 +4,6 @@ name: Publish to pub.dev
 #   push:
 #     tags:
 #       - '[0-9]+.[0-9]+.[0-9]+'
-runs-on: self-hosted
 
 on:
     push:
@@ -13,16 +12,18 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+
+    # runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
-      # - name: Install Flutter
-      #   uses: subosito/flutter-action@v1
-      #   with:
-      #     flutter-version: '3.22.2'
-      # - name: Install dependencies
-      #   run: flutter pub get
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '3.22.2'
+      - name: Install dependencies
+        run: flutter pub get
     #   - name: Analyze
     #     run: flutter analyze
     #   - name: Run tests
