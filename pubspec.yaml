@@ -1,6 +1,6 @@
 name: thinksys_mediapipe_plugin
 description: The ThinkSys Mediapipe Plugin brings pose detection to Flutter apps, filling a gap for iOS developers. It offers real-time tracking, easy integration, and customizable options for fitness and healthcare apps. By connecting MediaPipe's capabilities with Flutter's framework, we're enabling developers to build engaging, motion-based iOS apps easily.
-version: 0.0.9
+version: 0.0.10
 repository: https://github.com/Thinksys/mediapipe-flutter.git
 topics: [mediapipe, pose-detection]
 

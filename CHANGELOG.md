@@ -1,3 +1,7 @@
+## [0.0.10]
+### Changed
+- Updated `publish.yml` file.
+
 ## [0.0.9]
 ### Changed
 - Updated `publish.yml` file.
