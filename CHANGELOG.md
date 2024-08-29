@@ -1,3 +1,7 @@
+## [0.0.9]
+### Changed
+- Updated `publish.yml` file.
+
 ## [0.0.8]
 ### Changed
 - Updated `pub_login.sh`  file.

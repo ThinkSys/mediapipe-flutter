@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'thinksys_mediapipe_plugin'
-  s.version          = '0.0.5'
+  s.version          = '0.0.9'
   s.summary          = 'A new Flutter Plugin.'
   s.description      = <<-DESC
 A new Flutter Plugin.

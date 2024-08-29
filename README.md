@@ -12,7 +12,7 @@ The ThinkSys Mediapipe Plugin brings pose detection to Flutter apps, filling a g
 1. First add the dependency in ```pubspec.yaml``` file & do run ```flutter pub get``` in terminal
      ```
      dependencies:
-        thinksys_mediapipe_plugin: ^0.0.8
+        thinksys_mediapipe_plugin: ^0.0.9
 
      ```
 2. Add camera usage permission in Info.plist in example/ios
