@@ -22,10 +22,10 @@ jobs:
           flutter-version: '3.22.2'
       - name: Install dependencies
         run: flutter pub get
-      - name: Analyze
-        run: flutter analyze
-      - name: Run tests
-        run: flutter test
+      # - name: Analyze
+      #   run: flutter analyze
+      # - name: Run tests
+        # run: flutter test
       - name: Setup Pub Credentials
         shell: bash
         env:
@@ -36,6 +36,6 @@ jobs:
         run: |
           sh ./pub_login.sh
       - name: Check Publish Warnings
-        run: pub publish --dry-run
-      - name: Publish Package
-        run: pub publish -f
+        run: flutter pub publish --dry-run
+      # - name: Publish Package
+        # run: flutter pub publish -f

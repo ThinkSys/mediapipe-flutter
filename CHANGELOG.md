@@ -1,3 +1,7 @@
+## [0.0.8]
+### Changed
+- Updated `pub_login.sh`  file.
+
 ## [0.0.7]
 ### Changed
 - Updated metadata in `pubspec.yaml` file.
