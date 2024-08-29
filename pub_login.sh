@@ -29,4 +29,4 @@ cat <<EOF > ~/.config/dart/pub-credentials.json.test
   "scopes":["https://www.googleapis.com/auth/userinfo.email","openid"],
   "expiration":${PUB_DEV_PUBLISH_EXPIRATION}
 }
-EOF
+EOF 
