@@ -1,14 +1,14 @@
 name: Publish to pub.dev
 
-# on:
-#   push:
-#     tags:
-#       - '[0-9]+.[0-9]+.[0-9]+'
-
 on:
-    push:
-      branches:
-        - main
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+# on:
+#     push:
+#       branches:
+#         - main
 
 jobs:
   build:
@@ -35,7 +35,7 @@ jobs:
           PUB_DEV_PUBLISH_EXPIRATION: ${{ secrets.PUB_DEV_PUBLISH_EXPIRATION }}
         run: |
           sh ./pub_login.sh
-      - name: Check Publish Warnings
-        run: flutter pub publish --dry-run
-      # - name: Publish Package
-        # run: flutter pub publish -f
+      # - name: Check Publish Warnings
+      #   run: flutter pub publish --dry-run
+      - name: Publish Package
+        run: flutter pub publish -f
