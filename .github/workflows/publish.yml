@@ -42,4 +42,4 @@ jobs:
         run: cat ~/.pub-cache/credentials.json
 
       - name: Publish Package
-        run: yes | flutter pub publish
+        run: flutter pub publish -f --credentials ~/.pub-cache/credentials.json
