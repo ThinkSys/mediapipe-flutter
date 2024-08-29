@@ -1,14 +1,14 @@
 name: Publish to pub.dev
 
-# on:
-#   push:
-#     tags:
-#       - '[0-9]+.[0-9]+.[0-9]+'
-
 on:
-    push:
-      branches:
-        - pipeline
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+# on:
+#     push:
+#       branches:
+#         - pipeline
 
 jobs:
   build:
@@ -37,5 +37,5 @@ jobs:
           sh ./pub_login.sh
       - name: Check Publish Warnings
         run: flutter pub publish --dry-run
-      - name: Publish Package
-        run: flutter pub publish -f
+    #   - name: Publish Package
+    #     run: flutter pub publish -f
