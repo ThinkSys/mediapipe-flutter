@@ -1,19 +1,12 @@
 name: Publish to pub.dev
 
-# on:
-#   push:
-#     tags:
-#       - '[0-9]+.[0-9]+.[0-9]+'
-
 on:
-    push:
-      branches:
-        - pipeline
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   build:
-    # runs-on: self-hosted
-
     runs-on: ubuntu-latest
 
     steps:
@@ -22,18 +15,9 @@ jobs:
         uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.22.2'
+
       - name: Install dependencies
         run: flutter pub get
-
-      # - name: Setup Pub Credentials
-      #   shell: bash
-      #   env:
-      #     PUB_DEV_PUBLISH_ACCESS_TOKEN: ${{ secrets.PUB_DEV_PUBLISH_ACCESS_TOKEN }}
-      #     PUB_DEV_PUBLISH_REFRESH_TOKEN: ${{ secrets.PUB_DEV_PUBLISH_REFRESH_TOKEN }}
-      #     PUB_DEV_PUBLISH_TOKEN_ENDPOINT: ${{ secrets.PUB_DEV_PUBLISH_TOKEN_ENDPOINT }}
-      #     PUB_DEV_PUBLISH_EXPIRATION: ${{ secrets.PUB_DEV_PUBLISH_EXPIRATION }}
-      #   run: |
-          # sh ./pub_login.sh
 
       - name: Publish
         uses: k-paxian/dart-package-publisher@v1.5.1
@@ -41,9 +25,3 @@ jobs:
           credentialJson: ${{ secrets.CREDENTIAL_JSON }}
           flutter: true
           skipTests: true
-
-      # - name: Debug Credentials
-      #   run: cat ~/.config/dart/pub-credentials.json.test
-
-      # - name: Publish Package
-      #   run: flutter pub publish -f
