@@ -22,7 +22,7 @@ fi
 mkdir -p ~/.config/dart
 
 # Create credentials.json file.
-cat <<EOF > ~/.config/dart/pub-credentials.json
+cat <<EOF > ~/.config/dart/pub-credentials.json.test
   "accessToken":"${PUB_DEV_PUBLISH_ACCESS_TOKEN}",
   "refreshToken":"${PUB_DEV_PUBLISH_REFRESH_TOKEN}",
   "tokenEndpoint":"${PUB_DEV_PUBLISH_TOKEN_ENDPOINT}",
