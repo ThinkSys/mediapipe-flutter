@@ -1,3 +1,7 @@
+## [0.0.13]
+### Changed
+- Updated `README.md` file.
+
 ## [0.0.12]
 ### Changed
 - Updated `pubspec.yaml` file.

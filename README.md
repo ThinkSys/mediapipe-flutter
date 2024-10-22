@@ -12,7 +12,7 @@ The ThinkSys Mediapipe Plugin brings pose detection to Flutter apps, filling a g
 1. First add the dependency in ```pubspec.yaml``` file & do run ```flutter pub get``` in terminal
      ```
      dependencies:
-        thinksys_mediapipe_plugin: ^0.0.12
+        thinksys_mediapipe_plugin: ^0.0.13
 
      ```
 2. Add camera usage permission in Info.plist in example/ios
@@ -25,35 +25,99 @@ The ThinkSys Mediapipe Plugin brings pose detection to Flutter apps, filling a g
 
 4. Run ``` flutter pub get ```
 
+## Properties
+
+| Properties        | Description                                                                                     |
+|-------------|-------------------------------------------------------------------------------------------------|
+| `cameraFacing`     | Defines which camera to use (front or back). Affects the data provided by `cameraFacing`.                                                                      |
+| `cameraOrientation`    | Sets the camera orientation (portrait or landscape). Affects the data provided by `cameraOrientation`.                                                                |
+| `onLandmark`| Callback function to retrieve body landmark data.  |                                              |
+| `face`      | Toggles visibility of the face in the body model. Affects the data provided by `face`.      |
+| `leftArm`   | Toggles visibility of the left arm in the body model. Affects the data provided by `leftArm`.  |
+| `rightArm`  | Toggles visibility of the right arm in the body model. Affects the data provided by `rightArm`. |
+| `leftWrist` | Toggles visibility of the left wrist in the body model. Affects the data provided by `leftWrist`.|
+| `rightWrist`| Toggles visibility of the right wrist in the body model. Affects the data provided by `rightWrist`.|
+| `torso`     | Toggles visibility of the torso in the body model. Affects the data provided by `torso`.     |
+| `leftLeg`   | Toggles visibility of the left leg in the body model. Affects the data provided by `leftLeg`.  |
+| `rightLeg`  | Toggles visibility of the right leg in the body model. Affects the data provided by `rightLeg`. |
+| `leftAnkle` | Toggles visibility of the left ankle in the body model. Affects the data provided by `leftAnkle`.|
+| `rightAnkle`| Toggles visibility of the right ankle in the body model. Affects the data provided by `rightAnkle`.|
+
+
 ## Usage
+
+### Basic Usage
+For basic usage of the PoseLandmarks widget without any props:
 
 ```
 import 'package:thinksys_mediapipe_plugin/pose_detection.dart';
 
 PoseLandmarks(
-key: UniqueKey(),
-poseLandmarks: (value) {
-  print("Received Landmarks : $value");
-    },
+  key: UniqueKey(),
 )
+
+```
+### Usage with Camera Facing Option
+
+To specify which camera to use (front or back):
+
 ```
 
-You can also provide the options to enable/disable the landmarks on different parts of body:
+PoseLandmarks(
+  key: UniqueKey(),
+  cameraFacing: CameraFacing.front,
+)
+
+```
+### Usage with Orientation Handling
+
+To handle orientation changes (portrait or landscape):
+
+```
+
+PoseLandmarks(
+  key: UniqueKey(),
+  options: PoseLandmarkOptions(
+    cameraOrientation: orientation == Orientation.portrait
+        ? CameraOrientation.portrait
+        : CameraOrientation.landscape,
+  ),
+)
+
+```
+### Usage with Body Properties
+
+To customize which body parts are tracked using properties like face, leftArm, rightLeg, etc.:
+
+```
+
+PoseLandmarks(
+  key: UniqueKey(),
+  options: PoseLandmarkOptions(
+    face: true,
+    leftArm: true,
+    rightArm: true,
+    leftLeg: true,
+    rightLeg: true,
+    torso: true,
+  ),
+)
+
+```
+### Usage with onLandmark Properties
+
+To capture and process the pose landmarks detected:
 
 ````
 PoseLandmarks(
-    key: UniqueKey(),
-    options: PoseLandmarkOptions(
-    face: true,
-    leftLeg: false,
-    rightLeg: false,
-    leftArm: true,
-    rightArm: true,
-    torso: true),
+  key: UniqueKey(),
+  options: PoseLandmarkOptions(
     poseLandmarks: (value) {
-        print("Received Landmarks : $value");
+      print("Received Landmarks: $value");
     },
+  ),
 )
+
 ````
 
 ## 🔗 Links
